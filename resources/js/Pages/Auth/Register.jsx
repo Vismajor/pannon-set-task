@@ -3,15 +3,26 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Head, Link, useForm } from '@inertiajs/react';
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
+import 'dayjs/locale/hu';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
+        date_of_birth: dayjs(new Date()),
         password: '',
         password_confirmation: '',
     });
+
+    // useForm({
+    //     defaultValues: {
+    //         date_of_birth: new Date()
+    //     }
+    // })
 
     const submit = (e) => {
         e.preventDefault();
@@ -56,6 +67,19 @@ export default function Register() {
                         onChange={(e) => setData('email', e.target.value)}
                         required
                     />
+
+                    <InputError message={errors.email} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="date_of_birth" value="Date of Birth" />
+
+                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="hu">
+                        <DatePicker 
+                            value={data.date_of_birth}
+                            onChange={(date) => setData('date_of_birth', date)}
+                        />
+                    </LocalizationProvider>
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
