@@ -23,6 +23,7 @@
     "dependencies": {
         "@emotion/react": "^11.13.5",
         "@emotion/styled": "^11.13.5",
-        "date-fns": "^4.1.0"
+        "date-fns": "^4.1.0",
+        "dayjs": "^1.11.13"
     }
 }

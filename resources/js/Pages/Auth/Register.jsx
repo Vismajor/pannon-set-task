@@ -4,9 +4,10 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import dayjs from 'dayjs';
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset, transform } = useForm({
+    const { data, setData, post, processing, errors, reset, setError } = useForm({
         name: '',
         email: '',
         date_of_birth: new Date(),
@@ -16,6 +17,16 @@ export default function Register() {
     
     const submit = (e) => {
         e.preventDefault();
+
+        // check if user is over 18
+        // crude, does not account for leap year/precision
+
+        const age = dayjs().diff(dayjs(data.date_of_birth), 'year');
+
+        if(age < 18){
+            setError('date_of_birth', 'You must be over 18 to register');
+            return;
+        }
 
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation'),
@@ -70,7 +81,7 @@ export default function Register() {
                         onChange={(e) => setData('date_of_birth', e.target.value)}
                     />
 
-                    <InputError message={errors.email} className="mt-2" />
+                    <InputError message={errors.date_of_birth} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
