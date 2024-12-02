@@ -16,6 +16,7 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            date_of_birth: user.date_of_birth
         });
 
     const submit = (e) => {
@@ -67,6 +68,15 @@ export default function UpdateProfileInformation({
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="date_of_birth" value="Date of Birth" />
+                    <input type="date" 
+                        value={data.date_of_birth}
+                        onChange={(e) => setData('date_of_birth', e.target.value)}
+                        required
+                    />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
