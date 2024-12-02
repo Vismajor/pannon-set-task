@@ -3,27 +3,17 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Head, Link, useForm } from '@inertiajs/react';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
-import 'dayjs/locale/hu';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset, transform } = useForm({
         name: '',
         email: '',
-        date_of_birth: dayjs(new Date()),
+        date_of_birth: new Date(),
         password: '',
         password_confirmation: '',
     });
-
-    // useForm({
-    //     defaultValues: {
-    //         date_of_birth: new Date()
-    //     }
-    // })
-
+    
     const submit = (e) => {
         e.preventDefault();
 
