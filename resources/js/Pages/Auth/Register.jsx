@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/hu';
 
 export default function Register() {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors, reset, transform } = useForm({
         name: '',
         email: '',
         date_of_birth: dayjs(new Date()),
@@ -74,12 +74,11 @@ export default function Register() {
                 <div className="mt-4">
                     <InputLabel htmlFor="date_of_birth" value="Date of Birth" />
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="hu">
-                        <DatePicker 
-                            value={data.date_of_birth}
-                            onChange={(date) => setData('date_of_birth', date)}
-                        />
-                    </LocalizationProvider>
+                    <input 
+                        type='date'
+                        value={data.date_of_birth}
+                        onChange={(e) => setData('date_of_birth', e.target.value)}
+                    />
 
                     <InputError message={errors.email} className="mt-2" />
                 </div>
