@@ -20,7 +20,6 @@ export default function Register() {
 
         // check if user is over 18
         // crude, does not account for leap year/precision
-
         const age = dayjs().diff(dayjs(data.date_of_birth), 'year');
 
         if(age < 18){
