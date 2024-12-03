@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -44,6 +45,9 @@ class RegisteredUserController extends Controller
             'date_of_birth' => $request->date_of_birth
         ]);
 
+        event(new Registered($user));
+
+        $user->setConnection('sqlite');
         event(new Registered($user));
 
         Auth::login($user);
